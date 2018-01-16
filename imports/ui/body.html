@@ -1,0 +1,18 @@
+<body>
+  <div class="container">
+    <header>
+      <h1>Tickers to Price</h1>
+      <input class="button" type="button" name="gettix" value="GET TIX" />
+    </header>
+
+    <ul>
+      {{#each tokens}}
+        {{> token}}
+      {{/each}}
+    </ul>
+  </div>
+</body>
+
+<template name="token">
+  <li>{{token}} {{price}}</li>
+</template>
