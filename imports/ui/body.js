@@ -8,7 +8,13 @@ Template.body.helpers({
   tokens() {
     return Tokens.find({});
   },
+  currentTickerDisplay(){
+    return Tokens.findOne({});
+    //return "BTC: 0.01";
+  },
 });
+
+
 
 Template.body.events({
   'click .button' (event) {
@@ -20,8 +26,6 @@ Template.body.events({
     //if(options.extraParams)
     //    url += '&extraParams='+ options.extraParams;
 
-    //clean out the Collection
-    //db.ethereum_price_ticker.remove({});
 
     var updatePrice = function(e, res){
 
@@ -40,10 +44,19 @@ Template.body.events({
                             timestamp: null
                         }});
                         *****/
+
+                        /****
+                        var doc = Tokens.findOne({ token: name });
+                        Tokens.upsert({ _id: doc._id }, {$set:{token: name, price: String(price)}});
+                        *****/
+
+                        /*****
                         Tokens.insert({
                           token: name,
                           price: String(price) // current time
                         });
+                        *****/
+                        Meteor.call('tokens.insert', name, String(price));
                     }
 
                 });
@@ -56,6 +69,5 @@ Template.body.events({
     // update right away
     HTTP.get(url, updatePrice);
 
-    alert('clicked');
   }
 });
