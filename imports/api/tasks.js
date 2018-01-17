@@ -9,25 +9,16 @@ Meteor.methods({
   'tokens.insert'(tick, prce) {
     check(tick, String);
     check(prce, String);
-    //var now = new date();
-    /**
-    Tokens.insert({
-      token: tick,
-      price: prce,
-      time: new Date(),
-    });
-    **/
 
     Tokens.update(
-   { token: tick },
-   {
-      token: tick,
-      price: prce,
-      time: new Date()
-   },
-   { upsert: true }
-    );
-
+        { token: tick },
+        {
+          token: tick,
+          price: prce,
+          time: new Date()
+        },
+        { upsert: true }
+        );
   },
   /*****
   'tasks.remove'(taskId) {
